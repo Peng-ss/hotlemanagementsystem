@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cq.hotelmanagementsystem.mapper.TBillInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cq.hotelmanagementsystem.model.TBillInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bill_num" property="billNum" jdbcType="VARCHAR" />
+    <result column="guestroom_num" property="guestroomNum" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="checkin_time" property="checkinTime" jdbcType="TIMESTAMP" />
+    <result column="checkout_time" property="checkoutTime" jdbcType="TIMESTAMP" />
+    <result column="pay_price" property="payPrice" jdbcType="DECIMAL" />
+<<<<<<< HEAD
+    <result column="ramanks" property="ramanks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bill_num, guestroom_num, customer_id, checkin_time, checkout_time, pay_price, 
+    ramanks
+=======
+    <result column="remanks" property="remanks" jdbcType="VARCHAR" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bill_num, guestroom_num, customer_id, checkin_time, checkout_time, pay_price, 
+    remanks,is_pay
+>>>>>>> 完成
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_bill_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+<<<<<<< HEAD
+=======
+
+  <select id="selectNoPay"  resultType="java.util.HashMap">
+    select bi.*,ci.customer_name from
+    t_bill_info bi,t_customer_info ci WHERE
+    bi.customer_id = ci.id and is_pay =0
+  </select>
+
+  <select id="selectPay"  resultType="java.util.HashMap">
+    select bi.*,ci.customer_name from
+    t_bill_info bi,t_customer_info ci WHERE
+    bi.customer_id = ci.id and is_pay =1
+  </select>
+
+  <update id="pay" parameterType="java.lang.Integer">
+    update t_bill_info
+    set
+      is_pay = 1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+>>>>>>> 完成
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_bill_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.hotelmanagementsystem.model.TBillInfo" >
+    insert into t_bill_info (id, bill_num, guestroom_num, 
+      customer_id, checkin_time, checkout_time, 
+<<<<<<< HEAD
+      pay_price, ramanks)
+    values (#{id,jdbcType=INTEGER}, #{billNum,jdbcType=VARCHAR}, #{guestroomNum,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=INTEGER}, #{checkinTime,jdbcType=TIMESTAMP}, #{checkoutTime,jdbcType=TIMESTAMP}, 
+      #{payPrice,jdbcType=DECIMAL}, #{ramanks,jdbcType=VARCHAR})
+=======
+      pay_price, remanks,is_pay)
+    values (#{id,jdbcType=INTEGER}, #{billNum,jdbcType=VARCHAR}, #{guestroomNum,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=INTEGER}, #{checkinTime,jdbcType=TIMESTAMP}, #{checkoutTime,jdbcType=TIMESTAMP}, 
+      #{payPrice,jdbcType=DECIMAL}, #{remanks,jdbcType=VARCHAR}, #{isPay,jdbcType=BIT})
+>>>>>>> 完成
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.hotelmanagementsystem.model.TBillInfo" >
+    insert into t_bill_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="billNum != null" >
+        bill_num,
+      </if>
+      <if test="guestroomNum != null" >
+        guestroom_num,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="checkinTime != null" >
+        checkin_time,
+      </if>
+      <if test="checkoutTime != null" >
+        checkout_time,
+      </if>
+      <if test="payPrice != null" >
+        pay_price,
+      </if>
+<<<<<<< HEAD
+      <if test="ramanks != null" >
+        ramanks,
+=======
+      <if test="remanks != null" >
+        remanks,
+>>>>>>> 完成
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="billNum != null" >
+        #{billNum,jdbcType=VARCHAR},
+      </if>
+      <if test="guestroomNum != null" >
+        #{guestroomNum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="checkinTime != null" >
+        #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null" >
+        #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payPrice != null" >
+        #{payPrice,jdbcType=DECIMAL},
+      </if>
+<<<<<<< HEAD
+      <if test="ramanks != null" >
+        #{ramanks,jdbcType=VARCHAR},
+=======
+      <if test="remanks != null" >
+        #{remanks,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=BIT}
+>>>>>>> 完成
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.hotelmanagementsystem.model.TBillInfo" >
+    update t_bill_info
+    <set >
+      <if test="billNum != null" >
+        bill_num = #{billNum,jdbcType=VARCHAR},
+      </if>
+      <if test="guestroomNum != null" >
+        guestroom_num = #{guestroomNum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="checkinTime != null" >
+        checkin_time = #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null" >
+        checkout_time = #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payPrice != null" >
+        pay_price = #{payPrice,jdbcType=DECIMAL},
+      </if>
+<<<<<<< HEAD
+      <if test="ramanks != null" >
+        ramanks = #{ramanks,jdbcType=VARCHAR},
+=======
+      <if test="remanks != null" >
+        remanks = #{remanks,jdbcType=VARCHAR},
+>>>>>>> 完成
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.hotelmanagementsystem.model.TBillInfo" >
+    update t_bill_info
+    set bill_num = #{billNum,jdbcType=VARCHAR},
+      guestroom_num = #{guestroomNum,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      checkin_time = #{checkinTime,jdbcType=TIMESTAMP},
+      checkout_time = #{checkoutTime,jdbcType=TIMESTAMP},
+      pay_price = #{payPrice,jdbcType=DECIMAL},
+<<<<<<< HEAD
+      ramanks = #{ramanks,jdbcType=VARCHAR}
+=======
+      remanks = #{remanks,jdbcType=VARCHAR}
+>>>>>>> 完成
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

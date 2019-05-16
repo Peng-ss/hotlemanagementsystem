@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cq.hotlemanagementsystem.mapper.TReservationInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cq.hotlemanagementsystem.model.TReservationInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="guestroom_id" property="guestroomId" jdbcType="INTEGER" />
+    <result column="reservation_name" property="reservationName" jdbcType="VARCHAR" />
+    <result column="tele_num" property="teleNum" jdbcType="VARCHAR" />
+    <result column="checkin_time" property="checkinTime" jdbcType="TIMESTAMP" />
+    <result column="checkout_time" property="checkoutTime" jdbcType="TIMESTAMP" />
+    <result column="remanks" property="remanks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, guestroom_id, reservation_name, tele_num, checkin_time, checkout_time, remanks
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_reservation_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_reservation_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.hotlemanagementsystem.model.TReservationInfo" >
+    insert into t_reservation_info (id, guestroom_id, reservation_name, 
+      tele_num, checkin_time, checkout_time, 
+      remanks)
+    values (#{id,jdbcType=INTEGER}, #{guestroomId,jdbcType=INTEGER}, #{reservationName,jdbcType=VARCHAR}, 
+      #{teleNum,jdbcType=VARCHAR}, #{checkinTime,jdbcType=TIMESTAMP}, #{checkoutTime,jdbcType=TIMESTAMP}, 
+      #{remanks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.hotlemanagementsystem.model.TReservationInfo" >
+    insert into t_reservation_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="guestroomId != null" >
+        guestroom_id,
+      </if>
+      <if test="reservationName != null" >
+        reservation_name,
+      </if>
+      <if test="teleNum != null" >
+        tele_num,
+      </if>
+      <if test="checkinTime != null" >
+        checkin_time,
+      </if>
+      <if test="checkoutTime != null" >
+        checkout_time,
+      </if>
+      <if test="remanks != null" >
+        remanks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="guestroomId != null" >
+        #{guestroomId,jdbcType=INTEGER},
+      </if>
+      <if test="reservationName != null" >
+        #{reservationName,jdbcType=VARCHAR},
+      </if>
+      <if test="teleNum != null" >
+        #{teleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="checkinTime != null" >
+        #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null" >
+        #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remanks != null" >
+        #{remanks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.hotlemanagementsystem.model.TReservationInfo" >
+    update t_reservation_info
+    <set >
+      <if test="guestroomId != null" >
+        guestroom_id = #{guestroomId,jdbcType=INTEGER},
+      </if>
+      <if test="reservationName != null" >
+        reservation_name = #{reservationName,jdbcType=VARCHAR},
+      </if>
+      <if test="teleNum != null" >
+        tele_num = #{teleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="checkinTime != null" >
+        checkin_time = #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null" >
+        checkout_time = #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remanks != null" >
+        remanks = #{remanks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.hotlemanagementsystem.model.TReservationInfo" >
+    update t_reservation_info
+    set guestroom_id = #{guestroomId,jdbcType=INTEGER},
+      reservation_name = #{reservationName,jdbcType=VARCHAR},
+      tele_num = #{teleNum,jdbcType=VARCHAR},
+      checkin_time = #{checkinTime,jdbcType=TIMESTAMP},
+      checkout_time = #{checkoutTime,jdbcType=TIMESTAMP},
+      remanks = #{remanks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

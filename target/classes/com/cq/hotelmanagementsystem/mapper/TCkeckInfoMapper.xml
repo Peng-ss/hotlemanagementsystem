@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cq.hotelmanagementsystem.mapper.TCkeckInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cq.hotelmanagementsystem.model.TCkeckInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="guestroom_id" property="guestroomId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="checkin_time" property="checkinTime" jdbcType="TIMESTAMP" />
+    <result column="checkout_time" property="checkoutTime" jdbcType="TIMESTAMP" />
+    <result column="bill_num" property="billNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, guestroom_id, customer_id, user_id, checkin_time, checkout_time, bill_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_checkin_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_checkin_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.hotelmanagementsystem.model.TCkeckInfo" >
+    insert into t_checkin_info (id, guestroom_id, customer_id, 
+      user_id, checkin_time, checkout_time, 
+      bill_num)
+    values (#{id,jdbcType=INTEGER}, #{guestroomId,jdbcType=INTEGER}, #{customerId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{checkinTime,jdbcType=TIMESTAMP}, #{checkoutTime,jdbcType=TIMESTAMP}, 
+      #{billNum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.hotelmanagementsystem.model.TCkeckInfo" >
+    insert into t_checkin_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="guestroomId != null" >
+        guestroom_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="checkinTime != null" >
+        checkin_time,
+      </if>
+      <if test="checkoutTime != null" >
+        checkout_time,
+      </if>
+      <if test="billNum != null" >
+        bill_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="guestroomId != null" >
+        #{guestroomId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="checkinTime != null" >
+        #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null" >
+        #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billNum != null" >
+        #{billNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.hotelmanagementsystem.model.TCkeckInfo" >
+    update t_checkin_info
+    <set >
+      <if test="guestroomId != null" >
+        guestroom_id = #{guestroomId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="checkinTime != null" >
+        checkin_time = #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null" >
+        checkout_time = #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billNum != null" >
+        bill_num = #{billNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.hotelmanagementsystem.model.TCkeckInfo" >
+    update t_checkin_info
+    set guestroom_id = #{guestroomId,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      checkin_time = #{checkinTime,jdbcType=TIMESTAMP},
+      checkout_time = #{checkoutTime,jdbcType=TIMESTAMP},
+      bill_num = #{billNum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

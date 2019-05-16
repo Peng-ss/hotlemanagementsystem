@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/hotlemanagementsystem.iml" filepath="$PROJECT_DIR$/hotlemanagementsystem.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/hotelmanagementsystem.iml" filepath="$PROJECT_DIR$/hotelmanagementsystem.iml" />
+>>>>>>> 完成
+    </modules>
+  </component>
+</project>

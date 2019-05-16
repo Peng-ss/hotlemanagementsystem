@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cq.hotelmanagementsystem.mapper.TGuestroomInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cq.hotelmanagementsystem.model.TGuestroomInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="room_id" property="roomId" jdbcType="VARCHAR" />
+    <result column="room_type_id" property="roomTypeId" jdbcType="INTEGER" />
+<<<<<<< HEAD
+=======
+    <result column="room_type_name" property="roomTypeName" jdbcType="VARCHAR" />
+>>>>>>> 完成
+    <result column="room_name" property="roomName" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="tele_num" property="teleNum" jdbcType="VARCHAR" />
+    <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+    <result column="remanks" property="remanks" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+<<<<<<< HEAD
+    id, room_id, room_type_id, room_name, floor, state, is_enable, tele_num, admin_name, 
+    remanks, date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_guestroom_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+=======
+    t_guestroom_info.id, room_id, room_type_id,room_type_name ,room_name, floor, state, is_enable, tele_num, admin_name,
+    t_guestroom_info.remanks, date
+  </sql>
+
+  <select id="getAllGuestroom" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_guestroom_info,t_room_type
+    where t_guestroom_info.room_type_id =t_room_type.id
+  </select>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  select
+  <include refid="Base_Column_List" />
+  from t_guestroom_info,t_room_type
+  where t_guestroom_info.id = #{id,jdbcType=INTEGER}
+  and t_guestroom_info.room_type_id =t_room_type.id
+</select>
+
+
+  <select id="selectGuestRoomByRoomId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select
+    room_type_id
+    from t_guestroom_info,t_room_type
+    where room_id = #{room_id,jdbcType=INTEGER}
+    and t_guestroom_info.room_type_id =t_room_type.id
+    LIMIT 1
+  </select>
+
+  <select id="selectIdByRoomIdAndDate" resultType="java.lang.Integer">
+    select
+    id
+    from t_guestroom_info
+    where room_id = #{roomId,jdbcType=INTEGER}
+    and date = #{date,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectStateIdByRoomIdAndDate" resultType="java.lang.Integer">
+    select
+    state
+    from t_guestroom_info
+    where room_id = #{roomId,jdbcType=INTEGER}
+    and date = #{date,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllEmpty" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_guestroom_info,t_room_type
+    where state = 0
+    and t_guestroom_info.room_type_id =t_room_type.id
+    and is_enable = 1
+  </select>
+
+  <select id="selectEmptyByDate" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_guestroom_info,t_room_type
+    where state = 0
+    and is_enable = 1
+    and t_guestroom_info.room_type_id =t_room_type.id
+    and date = #{date,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectEmptyByType" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_guestroom_info,t_room_type
+    where state = 0
+    and is_enable = 1
+    and t_guestroom_info.room_type_id =t_room_type.id
+    and room_type_id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectEmptyByDateAndType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_guestroom_info,t_room_type
+    where state = 0
+    and t_guestroom_info.room_type_id =t_room_type.id
+    and is_enable = 1
+    and room_type_id = #{id,jdbcType=INTEGER}
+    and date = #{date,jdbcType=VARCHAR}
+  </select>
+
+>>>>>>> 完成
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_guestroom_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.hotelmanagementsystem.model.TGuestroomInfo" >
+    insert into t_guestroom_info (id, room_id, room_type_id, 
+      room_name, floor, state, 
+      is_enable, tele_num, admin_name, 
+      remanks, date)
+    values (#{id,jdbcType=INTEGER}, #{roomId,jdbcType=VARCHAR}, #{roomTypeId,jdbcType=INTEGER}, 
+      #{roomName,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{isEnable,jdbcType=BIT}, #{teleNum,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, 
+      #{remanks,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.hotelmanagementsystem.model.TGuestroomInfo" >
+    insert into t_guestroom_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="roomTypeId != null" >
+        room_type_id,
+      </if>
+      <if test="roomName != null" >
+        room_name,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="teleNum != null" >
+        tele_num,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+      <if test="remanks != null" >
+        remanks,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomTypeId != null" >
+        #{roomTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="roomName != null" >
+        #{roomName,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="teleNum != null" >
+        #{teleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="remanks != null" >
+        #{remanks,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.hotelmanagementsystem.model.TGuestroomInfo" >
+    update t_guestroom_info
+    <set >
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomTypeId != null" >
+        room_type_id = #{roomTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="roomName != null" >
+        room_name = #{roomName,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="teleNum != null" >
+        tele_num = #{teleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null" >
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="remanks != null" >
+        remanks = #{remanks,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.hotelmanagementsystem.model.TGuestroomInfo" >
+    update t_guestroom_info
+    set room_id = #{roomId,jdbcType=VARCHAR},
+      room_type_id = #{roomTypeId,jdbcType=INTEGER},
+      room_name = #{roomName,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT},
+      tele_num = #{teleNum,jdbcType=VARCHAR},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      remanks = #{remanks,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+<<<<<<< HEAD
+=======
+
+  <update id="setStateForGuestRoom" parameterType="java.lang.Integer" >
+    update t_guestroom_info
+    set
+      state = 1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="cancelStateForGuestRoom" parameterType="java.lang.Integer" >
+    update t_guestroom_info
+    set
+      state = 0
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="checkinStateForGuestRoom" >
+    update t_guestroom_info
+    set
+      state = 2
+    where room_id = #{roomId}
+    and   date = #{date}
+  </update>
+
+  <insert id="insertOrUdateGuestRoom"  parameterType="com.cq.hotelmanagementsystem.model.TGuestroomInfo">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()  AS id
+    </selectKey>
+    INSERT INTO `hotelmanagementsystem`.`t_guestroom_info`
+    ( `room_id`, `room_type_id`, `room_name`, `floor`, `state`, `is_enable`, `tele_num`, `admin_name`, `remanks`, `date`)
+    VALUES
+    (#{roomId,jdbcType=VARCHAR}, #{roomTypeId,jdbcType=INTEGER},
+      #{roomName,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, 1,
+      #{isEnable,jdbcType=BIT}, #{teleNum,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR},
+      #{remanks,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
+    ON DUPLICATE KEY UPDATE state = 1
+
+  </insert>
+>>>>>>> 完成
+</mapper>
