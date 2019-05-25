@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/hotlemanagementsystem.iml" filepath="$PROJECT_DIR$/hotlemanagementsystem.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/hotelmanagementsystem.iml" filepath="$PROJECT_DIR$/hotelmanagementsystem.iml" />
->>>>>>> 完成
+      <module fileurl="file://$PROJECT_DIR$/.idea/hotlemanagementsystem.iml" filepath="$PROJECT_DIR$/.idea/hotlemanagementsystem.iml" />
     </modules>
   </component>
 </project>
